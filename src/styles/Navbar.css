@@ -1,0 +1,80 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.form-container {
+  width: 100%;
+  max-width: 400px;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  margin: 50px auto;
+  text-align: center;
+}
+
+h2 {
+  margin-bottom: 20px;
+}
+
+form input, form select {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #218838;
+}
+/* Navbar background */
+.navbar {
+    background-color: #007bff !important;
+    padding: 10px 20px;
+  }
+  
+  /* Navbar links */
+  .navbar-nav {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .navbar-nav .nav-item {
+    position: relative;
+  }
+  
+  /* Dropdown menu */
+  .dropdown-menu {
+    background-color: white;
+    border-radius: 5px;
+  }
+  
+  .dropdown-menu .dropdown-item {
+    color: black;
+  }
+  
+  .dropdown-menu .dropdown-item:hover {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  /* Logout button */
+  .btn-danger {
+    font-size: 16px;
+    padding: 5px 10px;
+  }
+  

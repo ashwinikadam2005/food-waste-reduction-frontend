@@ -1,0 +1,41 @@
+.sidebar-like {
+    width: 100%;
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-top: 2px solid #ccc;
+    text-align: center;
+    box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .sidebar-like h3 {
+    color: #d63384;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .like-button {
+    background-color: #d63384;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    transition: 0.3s;
+  }
+  
+  .like-button:hover {
+    background-color: #a32669;
+  }
+  
+  .like-button:disabled {
+    background-color: #a32669;
+    cursor: not-allowed;
+  }
+  
+  .like-count {
+    font-size: 16px;
+    color: #333;
+  }
+  

@@ -1,0 +1,138 @@
+/* General container styling */
+.container {
+    max-width: 700px; /* Reduced width for a slightly smaller form */
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    text-align: center;
+    color: #4a90e2;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 28px;
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+  
+  /* Form styling */
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  /* Label styling */
+  label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    text-align: left; /* Aligned to the left */
+    margin-bottom: 5px;
+  }
+  
+  /* Input fields styling */
+  input[type="text"],
+  input[type="datetime-local"],
+  textarea,
+  select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #fff;
+    transition: border-color 0.3s ease;
+  }
+  
+  input[type="text"]:focus,
+  input[type="datetime-local"]:focus,
+  textarea:focus,
+  select:focus {
+    border-color: #4a90e2;
+    outline: none;
+  }
+  
+  textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+  
+  /* Button styling */
+  button[type="submit"] {
+    padding: 12px 20px;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: 600;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #357ABD;
+  }
+  
+  button[type="submit"]:active {
+    background-color: #286A97;
+  }
+  
+  /* Terms checkbox styling */
+  .terms-checkbox {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    gap: 10px;
+  }
+  
+  .terms-checkbox input {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+  }
+  
+  .terms-text {
+    color: #666;
+  }
+  
+  .terms-text a {
+    color: #4a90e2;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+  }
+  
+  .terms-text a:hover {
+    color: #357ABD;
+  }
+  
+  .terms-notice {
+    background-color: #f2f9ff;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #333;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Responsive styling */
+  @media (max-width: 768px) {
+    .container {
+      padding: 15px;
+      width: 90%; /* Adjust form width for small screens */
+    }
+  
+    h2 {
+      font-size: 24px;
+    }
+  
+    button[type="submit"] {
+      font-size: 14px;
+    }
+  }
+  

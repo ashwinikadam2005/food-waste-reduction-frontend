@@ -1,0 +1,70 @@
+/* Container for all cards */
+.donations-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+  background-color: #f0f4f8;
+}
+
+/* Individual card */
+.donation-card {
+  background-color: #ffffff;
+  color: #333;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  width: 30%;
+  min-width: 280px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  padding: 20px;
+  box-sizing: border-box;
+  transition: transform 0.3s ease;
+}
+
+.donation-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Headings inside cards */
+.donation-card h3 {
+  margin-top: 0;
+  font-size: 22px;
+  color: #0077b6;
+}
+
+/* Paragraphs */
+.donation-card p {
+  font-size: 14px;
+  margin: 6px 0;
+}
+
+/* Accept button */
+.accept-button {
+  margin-top: 15px;
+  padding: 10px 16px;
+  background-color: #00b894;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.accept-button:hover {
+  background-color: #019874;
+}
+
+/* Responsive for smaller screens */
+@media (max-width: 1000px) {
+  .donation-card {
+    width: 45%;
+  }
+}
+
+@media (max-width: 600px) {
+  .donation-card {
+    width: 100%;
+  }
+}

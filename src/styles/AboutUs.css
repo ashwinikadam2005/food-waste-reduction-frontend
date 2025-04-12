@@ -1,0 +1,146 @@
+/* Reset default styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+/* Hero Section */
+.hero-section {
+  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url("../assets/images/AboutUsbg.jpg") no-repeat center center/cover;
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+  position: relative;
+  padding: 20px;
+}
+
+.hero-content {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 15px rgba(0,0,0,0.3);
+  backdrop-filter: blur(5px);
+}
+
+.hero-content h1 {
+  font-size: 3.5rem;
+  margin-bottom: 15px;
+  letter-spacing: 1px;
+  color: #ffd700;
+  text-shadow: 2px 2px 5px rgba(0,0,0,0.6);
+}
+
+.hero-content p {
+  font-size: 1.3rem;
+  line-height: 1.6;
+  margin-top: 10px;
+}
+
+/* About Content */
+.about-content {
+  display: flex;
+  justify-content: space-between;
+  padding: 40px;
+  max-width: 1200px;
+  margin: auto;
+  gap: 30px;
+}
+
+.text-section {
+  flex: 1;
+  padding: 20px;
+  background: #fff;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  line-height: 1.7;
+}
+
+.text-section h2 {
+  font-size: 2.2rem;
+  margin-bottom: 15px;
+  color: #4caf50;
+  border-bottom: 2px solid #4caf50;
+  padding-bottom: 5px;
+}
+
+.image-section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-section img {
+  width: 100%;
+  max-width: 500px;
+  max-height: 500px;
+  border-radius: 15px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Steps Section */
+.aboutus-container {
+  text-align: center;
+  padding: 40px;
+  background: #f4f4f4;
+}
+
+.aboutus-heading {
+  font-size: 2.8rem;
+  margin-bottom: 20px;
+  color: #ff6600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.steps-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 25px;
+  margin-top: 20px;
+}
+
+.step {
+  background: #fff;
+  padding: 20px;
+  width: 270px;
+  height: 270px;
+  border-radius: 15px;
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.step:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.step-icon {
+  font-size: 3.5rem;
+  color: #4caf50;
+  margin-bottom: 10px;
+}
+
+.step h2 {
+  font-size: 1.6rem;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.step p {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #555;
+}
