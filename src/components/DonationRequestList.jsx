@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "../styles/DonationRequestList.css"; // Optional CSS file for styling
-
+import Cookies from "js-cookie";
 class DonationRequestList extends Component {
   constructor(props) {
     super(props);
@@ -22,11 +22,30 @@ class DonationRequestList extends Component {
   }
 
   handleAccept = (donationId) => {
-    // Placeholder for accept logic (e.g., assign to receiver or update status)
-    alert(`Donation ${donationId} accepted!`);
-    // You could also update status in backend here using axios.post()
+    const email = Cookies.get("userEmail"); // Get receiver email from cookie
+  
+    if (!email) {
+      alert("Please log in to accept the donation.");
+      return;
+    }
+  
+    axios
+      .post(`http://localhost:5001/donations/accept/${donationId}`, {
+        email: email, // send email instead of receiverId
+      })
+      .then((res) => {
+        alert("Donation accepted!");
+        this.setState((prevState) => ({
+          donations: prevState.donations.map((d) =>
+            d.donation_id === donationId ? { ...d, status: "Accepted" } : d
+          ),
+        }));
+      })
+      .catch((err) => {
+        console.error("Error accepting donation:", err);
+      });
   };
-
+    
   render() {
     const { donations } = this.state;
 

@@ -204,7 +204,7 @@ class Navbar extends Component {
                     <Link className="nav-link" to="/manage-users">Manage Users</Link>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link" to="/donations">Donations</Link>
+                    <Link className="nav-link" to="/accepted-donations">Donations</Link>
                   </li>
                   <li className="nav-item">
                     <Link className="nav-link" to="/history">History</Link>
@@ -229,7 +229,7 @@ class Navbar extends Component {
                     <Link className="nav-link" to="/donation-request-list">Available Food</Link>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link" to="/received-history">Received History</Link>
+                    <Link className="nav-link" to="/receiver-history">Received History</Link>
                   </li>
                 </>
               )}

@@ -1,61 +1,36 @@
-/* Container Styling */
-.donation-container {
-    max-width: 1000px;
-    margin: 40px auto;
-    background: #fff;
-    padding: 30px;
-    border-radius: 16px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
-  
-  /* Heading */
-  .donation-container h2 {
-    text-align: center;
-    margin-bottom: 25px;
-    color: #4a148c;
-    font-size: 28px;
-    font-weight: 600;
-  }
-  
-  /* Table Styling */
-  .donation-table {
-    width: 100%;
-    border-collapse: collapse;
-    overflow: hidden;
-    border-radius: 12px;
-  }
-  
-  /* Table Header */
-  .donation-table th {
-    background-color: #f3e5f5;
-    color: #4a148c;
-    padding: 14px;
-    text-align: left;
-    font-size: 16px;
-    font-weight: 600;
-    border-bottom: 2px solid #e1bee7;
-  }
-  
-  /* Table Body */
-  .donation-table td {
-    padding: 12px 14px;
-    border-bottom: 1px solid #f0f0f0;
-    font-size: 15px;
-    color: #333;
-  }
-  
-  /* Row Hover Effect */
-  .donation-table tbody tr:hover {
-    background-color: #fce4ec;
-    transition: background 0.3s ease;
-  }
-  
-  /* No Donations Message */
-  .donation-container p {
-    text-align: center;
-    font-size: 16px;
-    color: #777;
-    padding: 20px;
-  }
-  
+.donation-history {
+  padding: 20px;
+}
+
+.donation-card {
+  background: #f9f9f9;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.donation-card h3 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.donation-card p {
+  font-size: 1em;
+  margin-bottom: 5px;
+}
+
+.accept-button,
+.mark-completed-button {
+  background-color: #28a745;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.accept-button:hover,
+.mark-completed-button:hover {
+  background-color: #218838;
+}

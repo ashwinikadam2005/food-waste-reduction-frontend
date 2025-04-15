@@ -43,16 +43,21 @@ class ManageUsers extends Component {
         console.error("Error approving user:", error.response?.data || error);
       });
 };
-    handleBlock = (id) => {
-    axios
-      .post(`http://localhost:5001/block/${id}`)
-      .then(() => {
-        this.fetchUsers();
-      })
-      .catch((error) => {
-        console.error("Error blocking user:", error);
-      });
-  };
+handleBlock = (id) => {
+  const confirmDelete = window.confirm("Are you sure you want to delete this user?");
+  if (!confirmDelete) return;
+
+  axios
+    .post(`http://localhost:5001/block/${id}`)
+    .then(() => {
+      this.fetchUsers();
+      alert("User has been deleted successfully.");
+    })
+    .catch((error) => {
+      console.error("Error deleting user:", error);
+      alert("An error occurred while deleting the user.");
+    });
+};
   
   render() {
     return (

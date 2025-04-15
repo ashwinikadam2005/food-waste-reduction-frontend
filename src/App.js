@@ -14,6 +14,9 @@ import { useEffect } from "react";
 import axios from "axios";
 import OtpVerification from './components/OtpVerification';
 import MyDonations from './components/MyDonations';
+import ReceiverHistory from './components/ReceiverHistory';
+import AcceptedDonations from './components/AcceptedDonations';
+import AdminDashboard from './components/AdminDashboard';
 
 
 function App() {
@@ -39,11 +42,14 @@ function App() {
         <Route path="/login" element={<Login/>}/>
         <Route path="/contact" element={<ContactUs/>}/>
         <Route path="/food-donate" element={<FoodDonate/>}/>
+        <Route path="/admin-dashboard" element={<AdminDashboard/>}/>
 
         <Route path="/manage-users" element={<ManageUsers/>}/>
         <Route path="/donation-request-list" element={<DonationRequestList/>}/>
         <Route path="/otp-verification" element={<OtpVerification/>} />
         <Route path="/my-donations" element={<MyDonations/>} />
+        <Route path="/receiver-history" element={<ReceiverHistory/>} />
+        <Route path="/accepted-donations" element={<AcceptedDonations/>} />
 
         <Route path="*" element={<Navigate to="/" replace />} />
         
