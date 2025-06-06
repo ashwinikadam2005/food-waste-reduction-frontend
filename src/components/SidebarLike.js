@@ -1,22 +1,56 @@
 import React, { Component } from "react";
+import axios from "axios";
+import Cookies from "js-cookie";
 import "../styles/sidebarLike.css";
 
 class SidebarLike extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      likeCount: 100, // Initial like count
+      likeCount: 0,
       liked: false,
     };
   }
 
+  componentDidMount() {
+    const userEmail = Cookies.get("userEmail"); // ✅ corrected key
+    if (!userEmail) return;
+
+    axios
+      .get(`http://localhost:5001/api/likes?email=${userEmail}`, { withCredentials: true })
+      .then((res) => {
+        this.setState({
+          likeCount: res.data.totalLikes,
+          liked: res.data.userHasLiked,
+        });
+      })
+      .catch((err) => {
+        console.error("Error fetching like data:", err);
+      });
+  }
+
   handleLike = () => {
-    if (!this.state.liked) {
-      this.setState((prevState) => ({
-        likeCount: prevState.likeCount + 1,
-        liked: true,
-      }));
+    const userEmail = Cookies.get("userEmail"); // ✅ corrected key
+    if (!userEmail) {
+      alert("Please log in to like!");
+      return;
     }
+
+    axios
+      .post(
+        "http://localhost:5001/api/likes",
+        { email: userEmail },
+        { withCredentials: true }
+      )
+      .then((res) => {
+        this.setState({
+          likeCount: res.data.totalLikes,
+          liked: true,
+        });
+      })
+      .catch((err) => {
+        console.error("Error liking:", err);
+      });
   };
 
   render() {

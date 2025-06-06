@@ -1,22 +1,18 @@
 // import React, { Component } from "react";
 // import { Link } from "react-router-dom";
+// import Cookies from "js-cookie";
 // import "../styles/Navbar.css";
 
 // class Navbar extends Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       userRole: localStorage.getItem("userRole") || "",
-//     };
-//   }
-
 //   handleLogout = () => {
-//     localStorage.removeItem("userRole");
-//     window.location.reload(); // Refresh the page after logout
+//     Cookies.remove("userRole");
+//     Cookies.remove("userEmail");
+//     Cookies.remove("donor");
+//     window.location.href = "/"; // Navigate to homepage
 //   };
-
+  
 //   render() {
-//     const { userRole } = this.state;
+//     const userRole = Cookies.get("userRole"); // Read cookie here instead of constructor
 
 //     return (
 //       <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -79,11 +75,15 @@
 //                     <Link className="nav-link" to="/manage-users">Manage Users</Link>
 //                   </li>
 //                   <li className="nav-item">
-//                     <Link className="nav-link" to="/donations">Donations</Link>
+//                     <Link className="nav-link" to="/accepted-donations">Donations</Link>
 //                   </li>
 //                   <li className="nav-item">
-//                     <Link className="nav-link" to="/history">History</Link>
+//                     <Link className="nav-link" to="see-feedbacks">Feedbacks</Link>
 //                   </li>
+
+//                   {/* <li className="nav-item">
+//                     <Link className="nav-link" to="/history">History</Link>
+//                   </li> */}
 //                 </>
 //               )}
 
@@ -104,8 +104,12 @@
 //                     <Link className="nav-link" to="/donation-request-list">Available Food</Link>
 //                   </li>
 //                   <li className="nav-item">
-//                     <Link className="nav-link" to="/received-history">Received History</Link>
+//                     <Link className="nav-link" to="/receiver-history">Received History</Link>
 //                   </li>
+//                   <li className="nav-item">
+//                     <Link className="nav-link" to="/feedback-form">Feedback</Link>
+//                   </li>
+
 //                 </>
 //               )}
 
@@ -126,9 +130,8 @@
 
 // export default Navbar;
 
-
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import Cookies from "js-cookie";
 import "../styles/Navbar.css";
 
@@ -137,18 +140,18 @@ class Navbar extends Component {
     Cookies.remove("userRole");
     Cookies.remove("userEmail");
     Cookies.remove("donor");
-    window.location.reload(); // Refresh the page after logout
+    window.location.href = "/";
   };
 
   render() {
-    const userRole = Cookies.get("userRole"); // Read cookie here instead of constructor
+    const userRole = Cookies.get("userRole");
 
     return (
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
         <div className="container-fluid">
-          <Link className="navbar-brand fw-bold" to="/">
+          <NavLink className="navbar-brand" to="/">
             Food Waste Reduction
-          </Link>
+          </NavLink>
 
           <button
             className="navbar-toggler"
@@ -164,13 +167,13 @@ class Navbar extends Component {
               {userRole !== "admin" && (
                 <>
                   <li className="nav-item">
-                    <Link className="nav-link" to="/">Home</Link>
+                    <NavLink className="nav-link" to="/">Home</NavLink>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link" to="/about-us">About Us</Link>
+                    <NavLink className="nav-link" to="/about-us">About Us</NavLink>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link" to="/contact">Contact Us</Link>
+                    <NavLink className="nav-link" to="/contact">Contact Us</NavLink>
                   </li>
                 </>
               )}
@@ -186,10 +189,10 @@ class Navbar extends Component {
                   </button>
                   <ul className="dropdown-menu dropdown-menu-end">
                     <li>
-                      <Link className="dropdown-item" to="/admin-login">Login as Admin</Link>
+                      <NavLink className="dropdown-item" to="/admin-login">Login as Admin</NavLink>
                     </li>
                     <li>
-                      <Link className="dropdown-item" to="/login">Login as Donor/Receiver</Link>
+                      <NavLink className="dropdown-item" to="/login">Login as Donor/Receiver</NavLink>
                     </li>
                   </ul>
                 </li>
@@ -198,16 +201,16 @@ class Navbar extends Component {
               {userRole === "admin" && (
                 <>
                   <li className="nav-item">
-                    <Link className="nav-link" to="/admin-dashboard">Admin Dashboard</Link>
+                    <NavLink className="nav-link" to="/admin-dashboard">Admin Dashboard</NavLink>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link" to="/manage-users">Manage Users</Link>
+                    <NavLink className="nav-link" to="/manage-users">Manage Users</NavLink>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link" to="/accepted-donations">Donations</Link>
+                    <NavLink className="nav-link" to="/accepted-donations">Donations</NavLink>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link" to="/history">History</Link>
+                    <NavLink className="nav-link" to="/see-feedbacks">Feedbacks</NavLink>
                   </li>
                 </>
               )}
@@ -215,10 +218,10 @@ class Navbar extends Component {
               {userRole === "donor" && (
                 <>
                   <li className="nav-item">
-                    <Link className="nav-link" to="/my-donations">My Donations</Link>
+                    <NavLink className="nav-link" to="/my-donations">My Donations</NavLink>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link" to="/food-donate">Donate Food</Link>
+                    <NavLink className="nav-link" to="/food-donate">Donate Food</NavLink>
                   </li>
                 </>
               )}
@@ -226,10 +229,13 @@ class Navbar extends Component {
               {userRole === "receiver" && (
                 <>
                   <li className="nav-item">
-                    <Link className="nav-link" to="/donation-request-list">Available Food</Link>
+                    <NavLink className="nav-link" to="/donation-request-list">Available Food</NavLink>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link" to="/receiver-history">Received History</Link>
+                    <NavLink className="nav-link" to="/receiver-history">Received History</NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink className="nav-link" to="/feedback-form">Feedback</NavLink>
                   </li>
                 </>
               )}

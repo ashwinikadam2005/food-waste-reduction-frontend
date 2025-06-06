@@ -48,6 +48,7 @@
   }
   
   .chart-container .card {
+
     flex: 1 1 calc(50% - 20px);
     min-width: 300px;
     background-color: #fff;

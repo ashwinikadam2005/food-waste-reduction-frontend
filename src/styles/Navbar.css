@@ -3,78 +3,66 @@ body {
   font-family: Arial, sans-serif;
 }
 
-.form-container {
-  width: 100%;
-  max-width: 400px;
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-  margin: 50px auto;
-  text-align: center;
-}
-
-h2 {
-  margin-bottom: 20px;
-}
-
-form input, form select {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-button {
-  width: 100%;
-  padding: 10px;
-  background-color: #28a745;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #218838;
-}
-/* Navbar background */
 .navbar {
-    background-color: #007bff !important;
-    padding: 10px 20px;
-  }
-  
-  /* Navbar links */
-  .navbar-nav {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-  }
-  
-  .navbar-nav .nav-item {
-    position: relative;
-  }
-  
-  /* Dropdown menu */
-  .dropdown-menu {
-    background-color: white;
-    border-radius: 5px;
-  }
-  
-  .dropdown-menu .dropdown-item {
-    color: black;
-  }
-  
-  .dropdown-menu .dropdown-item:hover {
-    background-color: #007bff;
-    color: white;
-  }
-  
-  /* Logout button */
-  .btn-danger {
-    font-size: 16px;
-    padding: 5px 10px;
-  }
-  
+  background-color: #004080 !important;
+  padding: 10px 20px;
+}
+
+.navbar-brand {
+  color: #ffffff !important;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+/* Navbar links */
+.navbar-nav .nav-link {
+  color: #f0f0f0 !important;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #ffd700 !important;
+}
+
+/* Active link underline */
+.navbar-nav .nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0px;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  background-color: #ffd700;
+  border-radius: 5px;
+}
+
+/* Dropdown menu */
+.dropdown-menu {
+  background-color: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.dropdown-item {
+  color: #333;
+  transition: background-color 0.2s ease;
+}
+
+.dropdown-item:hover {
+  background-color: #004080;
+  color: #fff;
+}
+
+/* Logout button */
+.btn-danger {
+  font-size: 16px;
+  padding: 6px 12px;
+  border-radius: 6px;
+}
+
+/* Toggler */
+.navbar-toggler {
+  border-color: rgba(255, 255, 255, 0.5);
+}

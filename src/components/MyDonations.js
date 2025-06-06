@@ -1,11 +1,28 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import "../styles/MyDonations.css"; // Custom styles
 
 const MyDonations = () => {
   const [donations, setDonations] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
+  const [csrfToken, setCsrfToken] = useState(""); // Added state for CSRF token
 
+  // Fetch CSRF token on component mount
+  useEffect(() => {
+    const fetchCsrfToken = async () => {
+      try {
+        const response = await axios.get("http://localhost:5001/csrf-token", { withCredentials: true });
+        setCsrfToken(response.data.csrfToken); // Save CSRF token
+      } catch (err) {
+        console.error("Failed to fetch CSRF token:", err);
+      }
+    };
+
+    fetchCsrfToken();
+  }, []);
+
+  // Fetch donations
   useEffect(() => {
     const fetchDonations = async () => {
       try {
@@ -38,59 +55,90 @@ const MyDonations = () => {
     return new Date(dateString).toLocaleDateString();
   };
 
+  // Mark donation as completed
+  const handleMarkCompleted = async (donationId) => {
+    const confirm = window.confirm("Are you sure you want to mark this donation as completed?");
+    if (!confirm) return;
+  
+    try {
+      const response = await axios.put(
+        `http://localhost:5001/api/donations/mark-completed/${donationId}`,
+        {},
+        {
+          headers: {
+            'CSRF-Token': csrfToken,
+          },
+          withCredentials: true,
+        }
+      );
+  
+      // Get the completed date from the response
+      const completedAt = response.data.completedAt;
+  
+      // Update the donation status and completed_at locally
+      setDonations((prev) =>
+        prev.map((donation) =>
+          donation.id === donationId
+            ? { ...donation, status: "Completed", completed_at: completedAt }
+            : donation
+        )
+      );
+  
+      alert("Donation marked as completed!");
+    } catch (err) {
+      console.error("Error marking donation as completed:", err);
+      alert("Failed to mark as completed. Try again.");
+    }
+  };
+    
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+      <div className="loader-container">
+        <div className="loader"></div>
       </div>
     );
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold text-gray-800 mb-6">My Donations</h1>
+    <div className="donations-container">
+      <h1 className="title">My Donations</h1>
 
-      {error && (
-        <div className="bg-red-100 border border-red-400 text-red-700 p-4 mb-4 rounded">
-          {error}
+      {error && <div className="error-message">{error}</div>}
+
+      {!error && donations.length > 0 && (
+        <div className="card-grid">
+          {donations.map((donation) => (
+            <div key={donation.id} className="donation-card">
+              <h2 className="donation-title">{donation.food_name}</h2>
+              <div className="donation-info">
+                <p><strong>🍽 Category:</strong> {donation.food_category}</p>
+                <p><strong>📦 Quantity:</strong> {donation.quantity}</p>
+                <p><strong>⏳ Expiry:</strong> {formatDate(donation.expiry_date)}</p>
+                <p><strong>👩‍🍳 Prepared:</strong> {formatDate(donation.preparation_date)}</p>
+                <p><strong>❄️ Storage:</strong> {donation.storage_instructions || "N/A"}</p>
+                <p><strong>🕒 Donated On:</strong> {formatDate(donation.created_at)}</p>
+                <p><strong>📌 Status:</strong> {donation.status}</p>
+
+                {donation.status === "Accepted" && (
+                  <button
+                    className="complete-button"
+                    onClick={() => handleMarkCompleted(donation.id)}
+                  >
+                    ✅ Mark as Completed
+                  </button>
+                )}
+
+                {donation.status === "Completed" && (
+                  <p className="completed-status">✅ Completed</p>
+                )}
+              </div>
+            </div>
+          ))}
         </div>
       )}
 
-      {donations.length > 0 ? (
-        <div className="overflow-x-auto shadow-md sm:rounded-lg">
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
-              <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Food Category</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Food Name</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Quantity</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Expiry Date</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Preparation Date</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Storage Instructions</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Created At</th>
-              </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
-              {donations.map((donation) => (
-                <tr key={donation.id}>
-                  <td className="px-6 py-4 text-sm text-gray-500">{donation.food_category}</td>
-                  <td className="px-6 py-4 text-sm text-gray-500">{donation.food_name}</td>
-                  <td className="px-6 py-4 text-sm text-gray-500">{donation.quantity}</td>
-                  <td className="px-6 py-4 text-sm text-gray-500">{formatDate(donation.expiry_date)}</td>
-                  <td className="px-6 py-4 text-sm text-gray-500">{formatDate(donation.preparation_date)}</td>
-                  <td className="px-6 py-4 text-sm text-gray-500">{donation.storage_instructions || 'N/A'}</td>
-                  <td className="px-6 py-4 text-sm text-gray-500">{formatDate(donation.created_at)}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      ) : (
-        !error && (
-          <div className="bg-blue-100 border border-blue-400 text-blue-700 p-4 rounded">
-            You haven't made any donations yet.
-          </div>
-        )
+      {!error && donations.length === 0 && (
+        <div className="no-donations">You haven't made any donations yet.</div>
       )}
     </div>
   );

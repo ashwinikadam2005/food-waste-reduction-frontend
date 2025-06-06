@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
-import "../styles/DonationRequestList.css"; // Optional CSS file for styling
+import "../styles/DonationRequestList.css"; // Optional styling
 import Cookies from "js-cookie";
+
 class DonationRequestList extends Component {
   constructor(props) {
     super(props);
@@ -11,41 +12,48 @@ class DonationRequestList extends Component {
   }
 
   componentDidMount() {
+    this.fetchDonations();
+  }
+
+  fetchDonations = () => {
     axios
-      .get("http://localhost:5001/donations") // your backend route
+      .get("http://localhost:5001/donations")
       .then((res) => {
         this.setState({ donations: res.data });
       })
       .catch((err) => {
         console.error("Error fetching donations:", err);
       });
-  }
+  };
 
   handleAccept = (donationId) => {
-    const email = Cookies.get("userEmail"); // Get receiver email from cookie
-  
+    const email = Cookies.get("userEmail");
+
     if (!email) {
       alert("Please log in to accept the donation.");
       return;
     }
-  
+
     axios
-      .post(`http://localhost:5001/donations/accept/${donationId}`, {
-        email: email, // send email instead of receiverId
-      })
+      .post(`http://localhost:5001/donations/accept/${donationId}`, { email })
       .then((res) => {
         alert("Donation accepted!");
+
+        // Remove the accepted donation from the list
         this.setState((prevState) => ({
-          donations: prevState.donations.map((d) =>
-            d.donation_id === donationId ? { ...d, status: "Accepted" } : d
+          donations: prevState.donations.filter(
+            (d) => d.donation_id !== donationId
           ),
         }));
       })
       .catch((err) => {
         console.error("Error accepting donation:", err);
+        const msg =
+          err.response?.data?.error || "Something went wrong while accepting.";
+        alert(msg);
       });
   };
-    
+
   render() {
     const { donations } = this.state;
 
@@ -62,13 +70,26 @@ class DonationRequestList extends Component {
             <p><strong>Donor:</strong> {donation.organization_name}</p>
             <p><strong>Phone:</strong> {donation.phone}</p>
             <p><strong>Email:</strong> {donation.email}</p>
-            <p><strong>Address:</strong> {donation.address}</p>
-            <button
-              className="accept-button"
-              onClick={() => this.handleAccept(donation.donation_id)}
-            >
-              Accept
-            </button>
+            <p>
+              <strong>Address:</strong>{" "}
+              <a
+                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(donation.address)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="map-link"
+              >
+                {donation.address}
+              </a>
+            </p>
+
+            {donation.status === "Pending" && (
+              <button
+                className="accept-button"
+                onClick={() => this.handleAccept(donation.donation_id)}
+              >
+                Accept
+              </button>
+            )}
           </div>
         ))}
       </div>

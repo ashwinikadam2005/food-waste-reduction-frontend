@@ -144,10 +144,10 @@ const Login = () => {
 
         // Only allow donor and receiver roles
         if (role === "donor") {
-          navigate("/my-donations");
+          navigate("/");
           window.location.reload();
         } else if (role === "receiver") {
-          navigate("/donation-request-list");
+          navigate("/");
           window.location.reload();
         } else {
           // Invalid role for this login component

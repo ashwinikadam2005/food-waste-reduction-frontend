@@ -17,44 +17,63 @@ import MyDonations from './components/MyDonations';
 import ReceiverHistory from './components/ReceiverHistory';
 import AcceptedDonations from './components/AcceptedDonations';
 import AdminDashboard from './components/AdminDashboard';
-
+import PrivateRoute from './components/PrivateRoute';  // Import PrivateRoute
+import GenerateReport from './components/GenerateReport';
+import FeedbackForm from './components/FeedbackForm';
+import SeeFeedbacks from './components/SeeFeedback.js';
 
 function App() {
-    useEffect(() => {
-      const fetchCsrfToken = async () => {
-        const res = await axios.get("http://localhost:5001/csrf-token", {
-          withCredentials: true,
-        });
-        axios.defaults.headers.post["X-CSRF-Token"] = res.data.csrfToken;
-      };
-      fetchCsrfToken();
-    }, []);
+  useEffect(() => {
+    const fetchCsrfToken = async () => {
+      const res = await axios.get("http://localhost:5001/csrf-token", {
+        withCredentials: true,
+      });
+      axios.defaults.headers.post["X-CSRF-Token"] = res.data.csrfToken;
+    };
+    fetchCsrfToken();
+  }, []);
+
   return (
     <>
       <Navbar />
       <Routes>
-      <Route path="/" element={<Home />} /> Default to Home Page
+        <Route path="/" element={<Home />} /> {/* Default to Home Page */}
 
         <Route path="/admin-login" element={<AdminLogin />} />
-        {/* Add other routes here */}
-        <Route path="/about-us" element={<AboutUs/>}/>
-        <Route path="/donar-registeration" element={<DonarRegisteration/>}/>
-        <Route path="/login" element={<Login/>}/>
-        <Route path="/contact" element={<ContactUs/>}/>
-        <Route path="/food-donate" element={<FoodDonate/>}/>
-        <Route path="/admin-dashboard" element={<AdminDashboard/>}/>
+        <Route path="/about-us" element={<AboutUs />} />
+        <Route path="/donar-registeration" element={<DonarRegisteration />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/contact" element={<ContactUs />} />
 
-        <Route path="/manage-users" element={<ManageUsers/>}/>
-        <Route path="/donation-request-list" element={<DonationRequestList/>}/>
-        <Route path="/otp-verification" element={<OtpVerification/>} />
-        <Route path="/my-donations" element={<MyDonations/>} />
-        <Route path="/receiver-history" element={<ReceiverHistory/>} />
-        <Route path="/accepted-donations" element={<AcceptedDonations/>} />
+        {/* Protect admin routes with PrivateRoute, allowing only 'admin' */}
+        <Route
+          path="/admin-dashboard"
+          element={<PrivateRoute element={<AdminDashboard />} allowedRoles={['admin']} />}
+        />
+        <Route
+          path="/generate-report"
+          element={<PrivateRoute element={<GenerateReport />} allowedRoles={['admin']} />}
+        />
+        <Route
+          path="/see-feedbacks"
+          element={<PrivateRoute element={<SeeFeedbacks />} allowedRoles={['admin']} />}
+        />
+
+
+        <Route
+          path="/manage-users"
+          element={<PrivateRoute element={<ManageUsers />} allowedRoles={['admin']} />}
+        />
+        <Route path="/food-donate" element={<PrivateRoute element={<FoodDonate />} allowedRoles={['donor']} />} />
+
+        <Route path="/donation-request-list" element={<DonationRequestList />} />
+        <Route path="/otp-verification" element={<OtpVerification />} />
+        <Route path="/my-donations" element={<MyDonations />} />
+        <Route path="/receiver-history" element={<ReceiverHistory />} />
+        <Route path="/accepted-donations" element={<AcceptedDonations />} />
+        <Route path="/feedback-form" element={<FeedbackForm />} />
 
         <Route path="*" element={<Navigate to="/" replace />} />
-        
-
-
       </Routes>
     </>
   );
