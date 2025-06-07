@@ -16,7 +16,14 @@
     border-bottom: 2px solid #dee2e6;
     padding-bottom: 10px;
   }
-  
+  .donor-link {
+  color: #007bff;
+  text-decoration: none;
+}
+.donor-link:hover {
+  text-decoration: underline;
+}
+
   .error-message {
     background-color: #ffe5e5;
     color: #c0392b;

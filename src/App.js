@@ -21,6 +21,7 @@ import PrivateRoute from './components/PrivateRoute';  // Import PrivateRoute
 import GenerateReport from './components/GenerateReport';
 import FeedbackForm from './components/FeedbackForm';
 import SeeFeedbacks from './components/SeeFeedback.js';
+import DonorProfile from './components/DonorProfile.js';
 
 function App() {
   useEffect(() => {
@@ -72,6 +73,7 @@ function App() {
         <Route path="/receiver-history" element={<ReceiverHistory />} />
         <Route path="/accepted-donations" element={<AcceptedDonations />} />
         <Route path="/feedback-form" element={<FeedbackForm />} />
+        <Route path="/donor-profile/:donorId" element={<DonorProfile />} />
 
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

@@ -1,7 +1,8 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
-import "../styles/DonationRequestList.css"; // Optional styling
 import Cookies from "js-cookie";
+import "../styles/DonationRequestList.css";
 
 class DonationRequestList extends Component {
   constructor(props) {
@@ -36,10 +37,10 @@ class DonationRequestList extends Component {
 
     axios
       .post(`http://localhost:5001/donations/accept/${donationId}`, { email })
-      .then((res) => {
+      .then(() => {
         alert("Donation accepted!");
 
-        // Remove the accepted donation from the list
+        // Remove accepted donation from the list
         this.setState((prevState) => ({
           donations: prevState.donations.filter(
             (d) => d.donation_id !== donationId
@@ -67,13 +68,20 @@ class DonationRequestList extends Component {
             <p><strong>Expiry:</strong> {donation.expiry_date}</p>
             <p><strong>Preparation:</strong> {donation.preparation_date}</p>
             <p><strong>Storage:</strong> {donation.storage_instructions}</p>
-            <p><strong>Donor:</strong> {donation.organization_name}</p>
+            <p>
+              <strong>Donor:</strong>{" "}
+              <Link to={`/donor-profile/${donation.donorId}`}>
+                {donation.organization_name}
+              </Link>
+            </p>
             <p><strong>Phone:</strong> {donation.phone}</p>
             <p><strong>Email:</strong> {donation.email}</p>
             <p>
               <strong>Address:</strong>{" "}
               <a
-                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(donation.address)}`}
+                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                  donation.address
+                )}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="map-link"
