@@ -74,6 +74,7 @@ function App() {
         <Route path="/accepted-donations" element={<AcceptedDonations />} />
         <Route path="/feedback-form" element={<FeedbackForm />} />
         <Route path="/donor-profile/:donorId" element={<DonorProfile />} />
+        <Route path="/donor-profile/me" element={<DonorProfile />} />
 
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

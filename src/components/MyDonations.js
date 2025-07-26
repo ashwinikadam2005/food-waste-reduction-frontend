@@ -62,7 +62,7 @@ const MyDonations = () => {
   
     try {
       const response = await axios.put(
-        `http://localhost:5001/api/donations/mark-completed/${donationId}`,
+          `http://localhost:5001/api/mark-completed/${donationId}`,
         {},
         {
           headers: {

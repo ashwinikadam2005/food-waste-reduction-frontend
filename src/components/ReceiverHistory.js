@@ -16,18 +16,27 @@ class ReceiverHistory extends Component {
     };
   }
 
-  componentDidMount() {
-    const email = Cookies.get("userEmail");
-    if (!email) {
-      this.setState({ error: "You are not logged in. Please log in to view your donation history." });
-      return;
-    }
-
-    axios
-      .get("http://localhost:5001/donations/receiver/history", { params: { email } })
-      .then((res) => this.setState({ historyDonations: res.data }))
-      .catch(() => this.setState({ error: "Something went wrong. Please try again later." }));
+componentDidMount() {
+  const email = Cookies.get("userEmail");
+  if (!email) {
+    this.setState({ error: "You are not logged in. Please log in to view your donation history." });
+    return;
   }
+
+  axios.get("http://localhost:5001/donations/receiver/history", { params: { email } })
+    .then(res => {
+      const donations = res.data;
+      const ratedDonations = new Set(
+        donations.filter(d => d.rated).map(d => d.donation_id)
+      );
+      this.setState({ historyDonations: donations, ratedDonations });
+    })
+    .catch(err => {
+      console.error("Error fetching donation history:", err);
+      this.setState({ error: "Something went wrong. Please try again later." });
+    });
+}
+
 
   handleStarClick = (donationId, rating) => {
     if (this.state.ratedDonations.has(donationId)) return; // ✅ Prevent changes after submission

@@ -223,6 +223,9 @@ class Navbar extends Component {
                   <li className="nav-item">
                     <NavLink className="nav-link" to="/food-donate">Donate Food</NavLink>
                   </li>
+                  <li className="nav-item">
+                    <NavLink className="nav-link" to="/donor-profile/me">Reviews</NavLink>
+                  </li>
                 </>
               )}
 
